@@ -60,8 +60,21 @@ def main() -> None:
         host = os.getenv("HOST", "0.0.0.0")
         port = int(os.getenv("PORT", "8000"))
         api_key = os.getenv("MCP_API_KEY")
+        allowed_host = os.getenv("MCP_ALLOWED_HOST", "")
 
         import uvicorn
+        from mcp.server.transport_security import TransportSecuritySettings
+
+        if allowed_host:
+            mcp.settings.transport_security = TransportSecuritySettings(
+                enable_dns_rebinding_protection=True,
+                allowed_hosts=[f"{allowed_host}", "localhost:*", "127.0.0.1:*"],
+                allowed_origins=[f"https://{allowed_host}", "http://localhost:*", "http://127.0.0.1:*"],
+            )
+        else:
+            mcp.settings.transport_security = TransportSecuritySettings(
+                enable_dns_rebinding_protection=False,
+            )
 
         app = mcp.streamable_http_app()
 
