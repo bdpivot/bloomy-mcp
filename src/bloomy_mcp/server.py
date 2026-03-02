@@ -61,16 +61,15 @@ def main() -> None:
         port = int(os.getenv("PORT", "8000"))
         api_key = os.getenv("MCP_API_KEY")
 
-        if api_key:
-            # Run with API key middleware via custom ASGI app
-            import uvicorn
-            from bloomy_mcp.middleware import APIKeyMiddleware
+        import uvicorn
 
-            app = mcp.streamable_http_app()
+        app = mcp.streamable_http_app()
+
+        if api_key:
+            from bloomy_mcp.middleware import APIKeyMiddleware
             app.add_middleware(APIKeyMiddleware, api_key=api_key)
-            uvicorn.run(app, host=host, port=port)
-        else:
-            mcp.run(transport="streamable-http", host=host, port=port)
+
+        uvicorn.run(app, host=host, port=port)
     else:
         mcp.run()
 
