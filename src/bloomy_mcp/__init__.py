@@ -3,7 +3,7 @@
 Provides a Model Context Protocol (MCP) server for interacting with Bloom's GraphQL API.
 """
 
-from bloomy_mcp.client import Client, default_client
+from bloomy_mcp.client import Client, get_client
 from bloomy_mcp.formatters import format_type_info, generate_operation_example
 from bloomy_mcp.introspection import (
     get_available_queries,
@@ -20,7 +20,7 @@ from bloomy_mcp.operations import (
 __all__ = [
     # Client
     "Client",
-    "default_client",
+    "get_client",
     # Formatters
     "format_type_info",
     "generate_operation_example",

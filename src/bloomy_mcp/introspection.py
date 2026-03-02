@@ -7,7 +7,7 @@ from typing import List
 
 from gql import gql
 
-from bloomy_mcp.client import default_client
+from bloomy_mcp.client import get_client
 
 
 def get_available_queries() -> str:
@@ -32,7 +32,7 @@ def get_available_queries() -> str:
     """
     )
 
-    result = default_client.execute(queries_list_query)
+    result = get_client().execute(queries_list_query)
 
     # Create a simple comma-separated list of query names
     query_names = [field["name"] for field in result["__schema"]["queryType"]["fields"]]
@@ -61,7 +61,7 @@ def get_available_mutations() -> str:
     """
     )
 
-    result = default_client.execute(mutations_list_query)
+    result = get_client().execute(mutations_list_query)
 
     # Create a simple comma-separated list of mutation names
     mutation_names = [field["name"] for field in result["__schema"]["mutationType"]["fields"]]

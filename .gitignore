@@ -44,7 +44,7 @@ Thumbs.db
 
 # Project specific
 claude_desktop_config.json
+.envrc
 
 # Docker
-.dockerignore
 docker-compose.override.yml

@@ -62,7 +62,8 @@ def generate_operation_example(name: str, args: List[Dict[str, Any]], operation_
             arg_list.append(f"{arg['name']}: ${arg['name']}")
         args_section = f"({', '.join(arg_list)})"
 
-    return f"""{operation_type} {name.capitalize()}{variables_section} {{
+    capitalized_name = name[0].upper() + name[1:] if name else name
+    return f"""{operation_type} {capitalized_name}{variables_section} {{
   {name}{args_section} {{
     # Include fields you want to retrieve
     id

@@ -8,7 +8,7 @@ from typing import Any, Dict, List, Optional, Union
 import yaml
 from gql import gql
 
-from bloomy_mcp.client import default_client
+from bloomy_mcp.client import get_client
 from bloomy_mcp.formatters import format_type_info, generate_operation_example
 
 
@@ -73,7 +73,7 @@ def get_operation_details(operation_names: str, operation_type: str) -> str:
     )
 
     try:
-        result = default_client.execute(details_query)
+        result = get_client().execute(details_query)
 
         # Parse the list of operation names
         operation_name_list = [name.strip() for name in operation_names.split(",")]
@@ -174,7 +174,7 @@ def execute_query(query: str, variables: Optional[Dict[str, Any]] = None) -> Uni
     """
     try:
         parsed_query = gql(query)
-        result = default_client.execute(parsed_query, variable_values=variables)
+        result = get_client().execute(parsed_query, variable_values=variables)
         return result
     except Exception as e:
         return f"Error executing query: {str(e)}"
@@ -201,7 +201,7 @@ def get_authenticated_user_id() -> Union[str, None]:
         """
         )
 
-        result = default_client.execute(query)
+        result = get_client().execute(query)
         return result.get("getAuthenticatedUserId")
     except Exception as e:
         return f"Error getting authenticated user ID: {str(e)}"
