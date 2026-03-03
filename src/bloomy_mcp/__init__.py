@@ -1,36 +1,31 @@
-"""Bloom GraphQL MCP Server package.
+"""Bloom Growth REST API MCP Server package.
 
-Provides a Model Context Protocol (MCP) server for interacting with Bloom's GraphQL API.
+Provides a Model Context Protocol (MCP) server for interacting with Bloom Growth's REST API.
 """
 
 from bloomy_mcp.client import Client, get_client
-from bloomy_mcp.formatters import format_type_info, generate_operation_example
-from bloomy_mcp.introspection import (
-    get_available_queries,
-    get_available_mutations,
-    get_available_operation_names,
-)
-from bloomy_mcp.operations import (
-    get_query_details,
-    get_mutation_details,
-    execute_query,
-    get_authenticated_user_id,
+from bloomy_mcp.tools import (
+    get_capabilities,
+    get_my_rocks,
+    get_my_scorecard,
+    get_my_measurables,
+    get_my_issues,
+    list_meetings,
+    get_meeting_details,
+    get_meeting_todos,
+    get_meeting_issues,
 )
 
 __all__ = [
-    # Client
     "Client",
     "get_client",
-    # Formatters
-    "format_type_info",
-    "generate_operation_example",
-    # Introspection
-    "get_available_queries",
-    "get_available_mutations",
-    "get_available_operation_names",
-    # Operations
-    "get_query_details",
-    "get_mutation_details",
-    "execute_query",
-    "get_authenticated_user_id",
+    "get_capabilities",
+    "get_my_rocks",
+    "get_my_scorecard",
+    "get_my_measurables",
+    "get_my_issues",
+    "list_meetings",
+    "get_meeting_details",
+    "get_meeting_todos",
+    "get_meeting_issues",
 ]

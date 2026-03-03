@@ -1,13 +1,11 @@
 [project]
 name = "bloomy-mcp"
-version = "0.1.0"
-description = "Bloom Growth GraphQL MCP Server"
+version = "0.2.0"
+description = "Bloom Growth REST API MCP Server"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "mcp[cli]>=1.8.0",
-    "pyyaml>=6.0.2",
-    "gql>=3.4.1",
     "httpx>=0.27.0",
     "uvicorn>=0.30.0",
     "starlette>=0.38.0",

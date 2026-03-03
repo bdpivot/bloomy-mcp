@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Bloom GraphQL MCP Server.
+"""Bloom Growth REST API MCP Server.
 
-This server connects to Bloom Growth's GraphQL API and exposes it through
+This server connects to Bloom Growth's REST API v1 and exposes it through
 the Model Context Protocol (MCP).
 
 Transport modes (set via MCP_TRANSPORT env var):
@@ -15,37 +15,37 @@ import os
 
 from mcp.server.fastmcp import FastMCP
 
-from bloomy_mcp.introspection import (
-    get_available_queries,
-    get_available_mutations,
-)
-from bloomy_mcp.operations import (
-    get_query_details,
-    get_mutation_details,
-    execute_query,
-    get_authenticated_user_id,
+from bloomy_mcp.tools import (
+    get_capabilities,
+    get_my_rocks,
+    get_my_scorecard,
+    get_my_measurables,
+    get_my_issues,
+    list_meetings,
+    get_meeting_details,
+    get_meeting_todos,
+    get_meeting_issues,
 )
 
 
 # Initialize FastMCP server
-dependencies = [
-    "gql",
-    "httpx",
-    "pyyaml",
-]
-mcp = FastMCP("bloom-graphql", dependencies=dependencies)
+dependencies = ["httpx"]
+mcp = FastMCP("bloomy", dependencies=dependencies)
 
 
 # Register resources
-mcp.resource("bloom://queries")(get_available_queries)
-mcp.resource("bloom://mutations")(get_available_mutations)
+mcp.resource("bloom://capabilities")(get_capabilities)
 
 
 # Register tools
-mcp.tool()(get_query_details)
-mcp.tool()(get_mutation_details)
-mcp.tool()(execute_query)
-mcp.tool()(get_authenticated_user_id)
+mcp.tool()(get_my_rocks)
+mcp.tool()(get_my_scorecard)
+mcp.tool()(get_my_measurables)
+mcp.tool()(get_my_issues)
+mcp.tool()(list_meetings)
+mcp.tool()(get_meeting_details)
+mcp.tool()(get_meeting_todos)
+mcp.tool()(get_meeting_issues)
 
 
 def main() -> None:

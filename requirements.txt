@@ -1,3 +1,2 @@
 mcp[cli]
-gql[all]
 httpx
